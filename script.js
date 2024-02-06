@@ -9713,17 +9713,7 @@ __p+='`), D
             function ee(P, W, j, D, M) {
                 var $ = new FormData;
                 for (var ie in W) $.append(ie, W[ie]);
-                $.append("file", j, D), e.ajax({
-                    type: "POST",
-                    url: P,
-                    data: $,
-                    processData: !1,
-                    contentType: !1
-                }).done(function() {
-                    M(null)
-                }).fail(function(oe) {
-                    M(oe)
-                })
+                $.append("file", j, D)
             }
             return r
         })

@@ -202,12 +202,7 @@
                                 maxlength="5000" id="Message" name="Message" data-name="Message"
                                 class="form-input message w-input"></textarea><input type="submit"
                                 data-wait="Please wait..." class="main-btn w-button" value="Submit" /></form>
-                        <div class="w-form-done">
-                            <div>Thank you! Your submission has been received!</div>
-                        </div>
-                        <div class="w-form-fail">
-                            <div>Oops! Something went wrong while submitting the form.</div>
-                        </div>
+                            <div id = "status"></div>
                     </div>
                 </div>
             </div>
@@ -232,6 +227,27 @@
         type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
         crossorigin="anonymous"></script>
     <script src="script.js" type="text/javascript"></script>
+
+    <script>
+        document.getElementById('email-form').addEventListener('submit', function(event){
+        event.preventDefault();
+        
+        let formData = new FormData(event.target);
+        
+        fetch('send_mail.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('status').innerHTML = `<p style='color: green;'>${data}</p>`;
+        })
+        .catch(error => {
+            console.error('Error during fetch operation: ', error);
+            document.getElementById('status').innerHTML = `<p style='color: red;'>Error sending email!</p>`;
+        });
+    });
+      </script>
 </body>
 
 </html>
